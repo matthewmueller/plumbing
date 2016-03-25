@@ -15,6 +15,7 @@ npm install plumbing
 - infinite namespacing
 - composable middleware
 - composable plumbing instances
+- add hooks for additional methods, additional context, or method wrappers
 
 ## Plugins
 
