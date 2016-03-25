@@ -3,6 +3,8 @@
 
   Pluggable plumbing for your Javascript libraries.
 
+  This module allows you to handle things like tracing or buffering in one place instead of sticking it in each of your libraries.
+
 ## Installation
 
 ```
@@ -19,11 +21,11 @@ npm install plumbing
 
 ## Plugins
 
-- internal asynchronous queuing
-- buffering
-- debugging
-- proxying
-- tracing
+- [x] internal asynchronous queueing (see tests)
+- [ ] buffering
+- [x] logging (see tests)
+- [x] proxying (see tests)
+- [ ] tracing
 
 ## License
 
