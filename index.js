@@ -29,9 +29,9 @@ function Plumbing () {
   let middlewares = []
 
   args.map(function (arg) {
-    if (arg.__plumbing__) state = assign(state, arg.__plumbing__)
-    else if (typeof arg === 'object') state = assign(state, { actions: arg })
-    else if (typeof arg === 'function') middlewares.push(arg)
+    if (arg.__plumbing__) return state = assign(state, arg.__plumbing__)
+    if (typeof arg === 'object') return state = assign(state, { actions: arg })
+    if (typeof arg === 'function') return middlewares.push(arg)
   })
 
   // compose our middleware together
