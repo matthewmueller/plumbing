@@ -21,10 +21,11 @@ npm install plumbing
 
 ## Plugins
 
-- [x] internal asynchronous queueing (see tests)
+- [x] queueing (see tests)
 - [ ] buffering
 - [x] logging (see tests)
 - [x] proxying (see tests)
+- [ ] timeouts
 - [ ] tracing
 
 ## License
