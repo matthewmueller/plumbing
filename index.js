@@ -48,9 +48,9 @@ function Plumbing () {
   }
 
   // augment actions
-  actions = state.hooks.augments.reduce((actions, fn) => fn(actions) || actions, actions)
+  let augments = state.hooks.augments.reduce((augments, fn) => fn(augments) || augments, {})
 
-  keys(actions).forEach(function (action) {
+  keys(assign(actions, augments)).forEach(function (action) {
     if (typeof actions[action] === 'function') {
       Class.prototype[action] = function () {
         let trs = state.hooks.transforms
@@ -64,9 +64,11 @@ function Plumbing () {
         let args = sliced(arguments)
         let fn = actions[action]
 
-        fn = trs.reduce(function (fn, tr) {
-          return tr(fn, action)
-        }, fn)
+        if (!augments[action]) {
+          fn = trs.reduce(function (fn, tr) {
+            return tr(fn, action)
+          }, fn)
+        }
 
         // transform pipeline
         return fn.apply(ctx, args)

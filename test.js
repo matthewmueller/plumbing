@@ -190,6 +190,33 @@ describe('Plumbing', function() {
     assert.deepEqual(ins, ['→ module: a(a)', '→ module: b(b)'])
     assert.deepEqual(outs, ['← module: a(a) = aaaa', '← module: b(b) = bbbb'])
   })
+
+  it('should not transform augmented functions', function() {
+    let API = Plumbing({
+      a() {
+        return 'a'
+      }
+    }, mw)
+
+    function mw (hook) {
+      hook.augment(function(actions) {
+        actions.b = function () {
+          return 'b'
+        }
+      })
+
+      hook.transform(function (fn, name) {
+        return function () {
+          let ret = fn.apply(this, arguments)
+          return 't' + ret
+        }
+      })
+    }
+
+    let api = API()
+    assert.equal('ta', api.a())
+    assert.equal('b', api.b())
+  })
 })
 
 function Proxy (proxy) {
