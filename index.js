@@ -43,7 +43,7 @@ function Plumbing () {
 
   function Class (ctx) {
     if (!(this instanceof Class)) return new Class(ctx)
-    ctx = state.hooks.assigns.reduce((ctx, fn) => fn(ctx) || ctx, ctx)
+    ctx = state.hooks.assigns.reduce((ctx, fn) => fn(ctx) || ctx, ctx || {})
     assign(this, ctx)
   }
 
