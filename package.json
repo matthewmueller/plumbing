@@ -1,6 +1,6 @@
 {
   "name": "plumbing",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The pluggable plumbing for your APIs",
   "keywords": [
     "api",
