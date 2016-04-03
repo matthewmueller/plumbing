@@ -5,7 +5,8 @@
  */
 
 let flatten = require('lodash.flatten')
-let assign = require('deep-extend')
+let assign = require('object-assign')
+let extend = require('deep-extend')
 let sliced = require('sliced')
 let is_array = Array.isArray
 let keys = Object.keys
@@ -29,8 +30,8 @@ function Plumbing () {
   let middlewares = []
 
   args.map(function (arg) {
-    if (arg.__plumbing__) return state = assign(state, arg.__plumbing__)
-    if (typeof arg === 'object') return state = assign(state, { actions: arg })
+    if (arg.__plumbing__) return state = extend(state, arg.__plumbing__)
+    if (typeof arg === 'object') return state = extend(state, { actions: arg })
     if (typeof arg === 'function') return middlewares.push(arg)
   })
 
@@ -50,7 +51,7 @@ function Plumbing () {
   // augment actions
   let augments = state.hooks.augments.reduce((augments, fn) => fn(augments) || augments, {})
 
-  keys(assign(actions, augments)).forEach(function (action) {
+  keys(extend(actions, augments)).forEach(function (action) {
     if (typeof actions[action] === 'function') {
       Class.prototype[action] = function () {
         let trs = state.hooks.transforms

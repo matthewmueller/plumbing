@@ -17,6 +17,7 @@
   "dependencies": {
     "deep-extend": "0.4.1",
     "lodash.flatten": "4.1.0",
+    "object-assign": "4.0.1",
     "sliced": "1.0.1"
   },
   "devDependencies": {
