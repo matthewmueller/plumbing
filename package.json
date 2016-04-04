@@ -22,7 +22,11 @@
   },
   "devDependencies": {
     "co-mocha": "1.1.2",
-    "mocha": "2.4.5"
+    "is-generator-fn": "1.0.0",
+    "mocha": "2.4.5",
+    "thunkify": "2.1.2",
+    "unyield": "0.0.1",
+    "wrapped": "1.0.1"
   },
   "main": "index"
 }

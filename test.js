@@ -4,7 +4,10 @@
  * Module Dependencies
  */
 
+let is_generator = require('is-generator-fn')
 let assign = require('object-assign')
+let unyield = require('unyield')
+let wrapped = require('wrapped')
 let assert = require('assert')
 let sliced = require('sliced')
 let Plumbing = require('./')
@@ -239,6 +242,34 @@ describe('Plumbing', function() {
     let api = API()
     assert.equal('ta', api.a())
     assert.equal('b', api.b())
+  })
+
+  it('should support wrapping middleware', function * () {
+    let API = Plumbing({
+      a,
+      b
+    }, function wrap (hook) {
+      hook.transform(function (fn, name) {
+        if (!is_generator(fn)) return fn
+        return unyield(fn)
+      })
+    })
+
+    function a (a) {
+      assert.equal(a, 'a')
+      assert.equal(this.ctx, 'ctx')
+      return 'a'
+    }
+
+    function * b (b) {
+      assert.equal(b, 'b')
+      assert.equal(this.ctx, 'ctx')
+      return 'b'
+    }
+
+    let api = API({ ctx: 'ctx' })
+    assert.equal('a', api.a('a'))
+    assert.equal('b', yield api.b('b'))
   })
 })
 
