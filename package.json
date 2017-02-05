@@ -1,7 +1,7 @@
 {
   "name": "plumbing",
-  "version": "1.0.3",
-  "description": "The pluggable plumbing for your APIs",
+  "version": "2.0.0",
+  "description": "Shared context for great APIs",
   "keywords": [
     "api",
     "plumbing",
@@ -15,10 +15,7 @@
     "url": "git://github.com/MatthewMueller/plumbing.git"
   },
   "dependencies": {
-    "deep-extend": "0.4.1",
-    "lodash.flatten": "4.1.0",
-    "object-assign": "4.0.1",
-    "sliced": "1.0.1"
+    "object-assign": "4.0.1"
   },
   "devDependencies": {
     "co-mocha": "1.1.2",
